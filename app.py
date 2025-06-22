@@ -92,14 +92,17 @@ if st.button("Calcular"):
                 total += valor
                 restante -= faixa_consumo
 
-        st.markdown("<b>Tarifas por Faixa:</b>", unsafe_allow_html=True)
-        faixas_str = ["0–10", "11–20", "21–30", "31–40", "41+"]
-        for i, tarifa in enumerate(tarifas):
-            st.write(f"{faixas_str[i]} m³: R$ {tarifa:.4f}".replace('.', ','))
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("<b>Tarifas por Faixa:</b>", unsafe_allow_html=True)
+            faixas_str = ["0–10", "11–20", "21–30", "31–40", "41+"]
+            for i, tarifa in enumerate(tarifas):
+                st.write(f"{faixas_str[i]} m³: R$ {tarifa:.4f}".replace('.', ','))
 
-        st.markdown("<br><b>Forma do Cálculo:</b>", unsafe_allow_html=True)
-        for linha in detalhes:
-            st.text(linha)
+        with col2:
+            st.markdown("<b>Forma do Cálculo:</b>", unsafe_allow_html=True)
+            for linha in detalhes:
+                st.text(linha)
 
         total_truncado = math.ceil(total * 100) / 100
         total_formatado = f"{total_truncado:,.2f}".replace('.', ',').replace(',', 'v').replace('.', ',').replace('v', '.')
